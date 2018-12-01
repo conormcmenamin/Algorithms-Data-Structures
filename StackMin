@@ -1,0 +1,128 @@
+import java.util.Scanner;
+
+public class Lab {
+	public static void main(String args[]){
+		Scanner scan = new Scanner(System.in);
+		
+		
+		Stack s = new Stack();
+		String cmd;
+		int n = Integer.parseInt(scan.nextLine());
+		for(int i = 0; i< n; i++){
+			cmd = scan.nextLine();
+			if(cmd.startsWith("PUSH")){
+				s.push(Integer.parseInt(cmd.substring(cmd.indexOf(" ") +1)));
+			}
+			else{
+				s.pop();
+			}
+		}
+		
+		if(s.isEmpty()){
+			System.out.println("empty");
+		}
+		else{
+			System.out.println(s.min());
+		}
+			
+	}
+
+}
+public class Stack {
+	private Link head;
+	private Stack2 min;
+	public Stack(){
+		min = new Stack2();
+	}
+	
+	public void push(int n){
+		Link newLink = new Link(n);
+		if(head == null){
+			head = newLink;
+			min.push(n);
+		}
+		else{
+			Link prev = head; //Store the head object as the previous
+			head = newLink; // make the head be a new link with the value n
+			head.next = prev; //Make head.next refer to the previous head
+			if(newLink.data <= min.peek()) {
+				min.push(newLink.data);
+			}
+		}
+		
+		
+	}
+	public int pop(){
+		if(head == null){
+			return Integer.MIN_VALUE;
+		}
+		else{
+			Link tempLink = head;
+			head = head.next;
+			if(tempLink.data == min.peek()) {
+				min.pop();
+			}
+			return(tempLink.data);
+		}
+	}
+	public int peek(){
+		
+			return(head.data);
+
+	}
+	public boolean isEmpty(){
+		return (head == null);
+	}
+	public int min() {
+		return (min.peek());
+	}
+	
+}
+class Link{
+	public int data;
+	public Link next;
+	
+	public Link(int data){
+		this.data = data;	
+	}
+	public Link() {}
+}
+class Stack2{
+	
+	public Link head = new Link();
+	
+	public Stack2() {}
+	public boolean isEmpty() {
+		return head==null;
+	}
+  
+	public void push(int n) {
+		Link newLink = new Link(n);
+		if(isEmpty()) {
+			head = new Link(n);
+		}
+		else{
+			newLink.next = head;
+			head = newLink;
+		}
+	}
+	
+	public int pop() {
+		if(isEmpty()){
+			return Integer.MIN_VALUE;
+		}
+		else{
+			Link s = head;
+			head = head.next;
+			return s.data;
+		}
+	}
+	public int peek(){
+		if(isEmpty()){
+			return Integer.MIN_VALUE;
+		}
+		else{
+			return head.data;
+		}
+	}
+}
