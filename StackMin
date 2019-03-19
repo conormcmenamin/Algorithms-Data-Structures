@@ -1,3 +1,32 @@
+//This was a simple exercise to find an O(1) solution to finding the minimum value on a stack. 
+//The regular O(n) method is to have an instance method that, when called, creates a new temporary 
+//stack to pop everything off the "main" stack onto this one and tracking the minimum value you see as this is done, 
+//then returning everything back to the main stack again and returning the smallest value observed.
+
+//A much more efficient approach is to have a stack that has two attributes, a head node and a stack that tracks the 
+//minimum value at any point, a "minStack". It does this by making the initial value added to the stack, the minimum 
+//(because the minimum value of a list of 1 number is simply that number) and as values are added, we check if they 
+//are less than or equal to the head of the minStack, if they are, we push that value onto the minStack as this is our 
+//new minimum. The reason you check if the value is equal to the current minimum is because we can always push two nodes 
+//with the same minimum value on the main stack, in which case we want to have two copies of this on our minStack also for 
+//popping this off later on. If we pop off the minimum value on the stack then we pop this off our minStack.
+
+//Note: This program takes n instructions, each on a new line from stdin in the form of a command followed by a value 
+//e.g. "PUSH 7" or "POP".
+
+Input:
+7
+PUSH 7
+PUSH 23
+PUSH -1
+POP
+PUSH -4
+PUSH 10
+POP
+
+Output:
+-4
+
 import java.util.Scanner;
 
 public class Lab {
