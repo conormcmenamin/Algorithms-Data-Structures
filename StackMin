@@ -30,9 +30,9 @@ public class Lab {
 }
 public class Stack {
 	private Link head;
-	private Stack2 min;
+	private Stack2 minStack;
 	public Stack(){
-		min = new Stack2();
+		minStack = new Stack2();
 	}
 	
 	public void push(int n){
@@ -42,11 +42,11 @@ public class Stack {
 			min.push(n);
 		}
 		else{
-			Link prev = head; //Store the head object as the previous
-			head = newLink; // make the head be a new link with the value n
-			head.next = prev; //Make head.next refer to the previous head
-			if(newLink.data <= min.peek()) {
-				min.push(newLink.data);
+			Link prev = head; 			//Store the head object as the previous
+			head = newLink; 			//make the head be a new link with the value n
+			head.next = prev; 			//Make head.next refer to the previous head
+			if(newLink.data <= minStack.peek()) {
+				minStack.push(newLink.data);
 			}
 		}
 		
@@ -59,24 +59,21 @@ public class Stack {
 		else{
 			Link tempLink = head;
 			head = head.next;
-			if(tempLink.data == min.peek()) {
-				min.pop();
+			if(tempLink.data == minStack.peek()) {
+				minStack.pop();
 			}
 			return(tempLink.data);
 		}
 	}
 	public int peek(){
-		
 			return(head.data);
-
 	}
 	public boolean isEmpty(){
 		return (head == null);
 	}
 	public int min() {
-		return (min.peek());
+		return (minStack.peek());
 	}
-	
 }
 class Link{
 	public int data;
