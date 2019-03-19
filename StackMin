@@ -39,7 +39,7 @@ public class Stack {
 		Link newLink = new Link(n);
 		if(head == null){
 			head = newLink;
-			min.push(n);
+			minStack.push(n);
 		}
 		else{
 			Link prev = head; 			//Store the head object as the previous
